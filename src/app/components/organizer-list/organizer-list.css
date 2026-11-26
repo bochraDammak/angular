@@ -8,3 +8,8 @@
   object-fit: cover;
   object-position: top;
 }
+
+:host {
+  display: block;
+  padding-bottom: 48px;
+}

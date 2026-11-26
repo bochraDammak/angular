@@ -1,0 +1,112 @@
+.page {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* search bar */
+.search-input {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  font-size: 1.1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.2);
+}
+
+/* table */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.conf-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.conf-table thead {
+  background: #212529;
+  color: white;
+}
+
+.conf-table th,
+.conf-table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.conf-table .center {
+  text-align: center;
+}
+
+.conf-row {
+  border-top: 1px solid #dee2e6;
+}
+
+.conf-row:hover,
+.conf-row:hover + .organizers-row {
+  background: #f1f5f9;
+}
+
+.conf-title {
+  font-weight: 600;
+}
+
+/* organizers line under each conference */
+.organizers-row {
+  background: #f8f9fa;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.organizers-row td {
+  padding-top: 6px;
+  padding-bottom: 10px;
+  padding-left: 28px;
+}
+
+/* available places badge */
+.badge {
+  display: inline-block;
+  min-width: 36px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: white;
+  font-weight: 600;
+}
+
+.badge.available {
+  background: #198754;
+}
+
+.badge.full {
+  background: #dc3545;
+}
+
+/* participate button */
+.btn-participate {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #198754;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-participate:hover {
+  background: #157347;
+}
