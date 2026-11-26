@@ -1,15 +1,41 @@
-<div class="container py-3">
-  <div class="d-flex flex-wrap justify-content-center gap-3">
-    <div class="card" style="width: 18rem;">
-      <img src="/image.jpg" class="card-img-top" alt="Event image" style="height: 140px; object-fit: cover;">
-      <div class="card-body p-2">
-        <h6 class="card-title mb-1">Title</h6>
-        <p class="card-text small mb-1">Description: a short text describing the item or event.</p>
-        <p class="card-text small mb-1"><strong>Address:</strong> 12 Avenue Habib Bourguiba, Tunis</p>
-        <p class="card-text small mb-1"><strong>Date:</strong> 01/12/2026</p>
-        <p class="card-text small mb-2"><strong>Available:</strong> <span class="badge text-bg-success">25</span></p>
-        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-</div>
+<h1>{{ title }}</h1>
+
+<!-- two way data binding -->
+<form>
+  <input type="text" name="title" class="form-control"
+         placeholder="Search conferences by title..." [(ngModel)]="searchTitle"/>
+</form>
+
+<h1>{{ searchTitle }}</h1>
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>title</th>
+    <th>date</th>
+    <th>address</th>
+    <th>Available places</th>
+    <th>Participate</th></tr>
+  <!-- boule for (interpolation)-->
+  @for (Conference of listConference; track Conference.id)
+  {
+    @if (Conference.title == searchTitle || searchTitle == null)
+    {
+      <tr>
+        <td>{{ Conference.id }}</td>
+        <td>{{ Conference.title | uppercase }}</td>
+        <td>{{ Conference.date }}</td>
+        <td>{{ Conference.address }}</td>
+        <td>{{ Conference.nbr_Max - Conference.nbr_Participation }}</td>
+        <td>
+          <!-- preperty binding [Property]="variable"   ici hidden/disabled-->
+          <!-- event binding (event)="function()" -->
+          <button class="btn btn-sm btn-success"
+                  [hidden]="Conference.nbr_Max - Conference.nbr_Participation <= 0"
+                    (click)="participate(Conference)">
+            Participate
+          </button>
+        </td>
+      </tr>
+    }
+  }
+</table>
