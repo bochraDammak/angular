@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 import { FormsModule } from '@angular/forms';
+import { Conference } from '../../models/conference';
+import { OrganizerList } from '../../components/organizer-list/organizer-list';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, OrganizerList],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-
 export class Home {
   //attribute
   title: string;
@@ -34,6 +34,22 @@ export class Home {
         date: '10-12-2026',
         picture:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv8Q9Y17iP9yV07pJQIuBtfKqoy5nKcP_GiIamFG9udg&s=10',
+        organizers: [
+          {
+            id: 1,
+            name: 'Organizer 1',
+            email: 'organizer1@esprit.tn',
+            picture: '/organizers/o1.jpg',
+            university: 'ESPRIT',
+          },
+          {
+            id: 3,
+            name: 'Organizer 3',
+            email: 'organizer3@esprit.tn',
+            picture: '/organizers/o3.jpg',
+            university: 'ESPRIT',
+          },
+        ],
       },
       {
         id: 2,
@@ -45,11 +61,12 @@ export class Home {
         date: '10-11-2026',
         picture:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5agxXUSsI3J6nJYssKdxaZEO5xpTCsh4P6U4qKGXH2w&s=10',
+        organizers: [],
       },
     ];
   }
 
-  participate(conference: Conference){
+  participate(conference: Conference) {
     conference.nbr_Participation++;
-    }
+  }
 }

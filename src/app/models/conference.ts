@@ -1,6 +1,8 @@
 //conference is dto class declared on the backendside
 //best practice we need to declare it as interface
-class Conference {
+import { Organizer } from './organizer';
+
+export class Conference {
   id: number;
   title: string;
   description: string;
@@ -9,5 +11,6 @@ class Conference {
   nbr_Max: number;
   nbr_Participation: number;
   date: string;
+  organizers: Organizer[];
 
 }

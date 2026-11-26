@@ -1,41 +1,64 @@
-<h1>{{ title }}</h1>
+<div class="container my-4">
+  <h1 class="text-center mb-4">{{ title }}</h1>
 
-<!-- two way data binding -->
-<form>
-  <input type="text" name="title" class="form-control"
-         placeholder="Search conferences by title..." [(ngModel)]="searchTitle"/>
-</form>
+  <!-- two way data binding -->
+  <form class="mb-4">
+    <input type="text" name="title" class="form-control form-control-lg"
+           placeholder="Search conferences by title..." [(ngModel)]="searchTitle"/>
+  </form>
 
-<h1>{{ searchTitle }}</h1>
-<table class="table">
-  <tr>
-    <th>id</th>
-    <th>title</th>
-    <th>date</th>
-    <th>address</th>
-    <th>Available places</th>
-    <th>Participate</th></tr>
-  <!-- boule for (interpolation)-->
-  @for (Conference of listConference; track Conference.id)
-  {
-    @if (Conference.title == searchTitle || searchTitle == null)
-    {
+  <div class="table-responsive shadow-sm rounded">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-dark">
       <tr>
-        <td>{{ Conference.id }}</td>
-        <td>{{ Conference.title | uppercase }}</td>
-        <td>{{ Conference.date }}</td>
-        <td>{{ Conference.address }}</td>
-        <td>{{ Conference.nbr_Max - Conference.nbr_Participation }}</td>
-        <td>
-          <!-- preperty binding [Property]="variable"   ici hidden/disabled-->
-          <!-- event binding (event)="function()" -->
-          <button class="btn btn-sm btn-success"
-                  [hidden]="Conference.nbr_Max - Conference.nbr_Participation <= 0"
-                    (click)="participate(Conference)">
-            Participate
-          </button>
-        </td>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Address</th>
+        <th class="text-center">Available places</th>
+        <th class="text-center">Participate</th>
       </tr>
-    }
-  }
-</table>
+      </thead>
+      <tbody>
+        @for (Conference of listConference; track Conference.id)
+        {
+          @if (Conference.title == searchTitle || searchTitle == null)
+          {
+            <tr>
+              <td>{{ Conference.id }}</td>
+              <td class="fw-semibold">{{ Conference.title | uppercase }}</td>
+              <td>{{ Conference.date }}</td>
+              <td>{{ Conference.address }}</td>
+              <td class="text-center">
+                <span class="badge rounded-pill"
+                      [class.bg-success]="Conference.nbr_Max - Conference.nbr_Participation > 0"
+                      [class.bg-danger]="Conference.nbr_Max - Conference.nbr_Participation <= 0">
+                  {{ Conference.nbr_Max - Conference.nbr_Participation }}
+                </span>
+              </td>
+              <td class="text-center">
+                <button class="btn btn-sm btn-success"
+                        [hidden]="Conference.nbr_Max - Conference.nbr_Participation <= 0"
+                        (click)="participate(Conference)">
+                  Participate
+                </button>
+              </td>
+            </tr>
+            <tr class="table-light">
+              <td colspan="6" class="small text-muted ps-4">
+                <strong>Organisée par :</strong>
+                @for (organizer of Conference.organizers; track organizer.id) {
+                  {{ organizer.name }}@if (!$last) {<span>, </span>}
+                } @empty {
+                  <em>Aucun organisateur</em>
+                }
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-organizer-list />
